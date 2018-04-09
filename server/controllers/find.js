@@ -20,6 +20,14 @@ const findTeam = (name, market) => {
   });
 };
 
+const findAll = () => {
+  return Team.find({}).then((teams) => {
+    return teams;
+  }).catch((err) => {
+    return Promise.reject();
+  });
+}
 module.exports = {
-  findTeam
+  findTeam,
+  findAll
 }
