@@ -1,5 +1,10 @@
 const find = require('./../controllers/find');
 
+/**
+ * Route users to home page with data from collection about teams
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getHome = (req, res) => {
   find.findAllTeams().then((teams) => {
     res.render('home.hbs', {
