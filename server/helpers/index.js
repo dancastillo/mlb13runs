@@ -1,8 +1,6 @@
-const sportradar = require('./../../keys');
-
 const apiUrl = () => {
-  return `http://api.sportradar.us/mlb-t6/games/${getDateFormat()}/boxscore.json?api_key=${sportradar.key}`
-}
+  return `http://api.sportradar.us/mlb-t6/games/${getDateFormat()}/boxscore.json?api_key=${process.env.API_KEY}`;
+};
 
 const getDateFormat = () => {
   const date = new Date();
@@ -16,10 +14,9 @@ const getDateFormat = () => {
   const dd = (day < 10) ? `0${day}` : day;
 
   return `${yy}/${mm}/${dd}`;
-}
+};
 
 module.exports = {
   apiUrl,
   getDateFormat
-}
-console.log(apiUrl())
+};
