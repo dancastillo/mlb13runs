@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13 Runs</title>
+</head>
+<body>
+  <h3>First to 13 runs wins!</h3>
+  {{!-- {{teams}} --}}
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Runs</th>
+    </tr>
+    {{#each teams}}
+    <tr>
+      <td>{{this.market}} {{this.name}}</td>
+      <td>{{this.runs}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  
+</body>
+</html>
