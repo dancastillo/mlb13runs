@@ -29,6 +29,10 @@ const TeamSchema = new Schema({
     type: String,
     required: true
   },
+  abbr: {
+    type: String,
+    require: true
+  },
   // array of runs obtained
   runs: {
     type: [Number],
