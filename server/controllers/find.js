@@ -1,3 +1,4 @@
+const mongoose = require('./../db/mongoose');
 const {Team} = require('./../models/team');
 const save = require('./save');
 
@@ -20,14 +21,15 @@ const findTeam = (name, market) => {
   });
 };
 
-const findAll = () => {
-  return Team.find({}).then((teams) => {
+const findAllTeams = () => {
+  return Team.find().then((teams) => {
     return teams;
   }).catch((err) => {
     return Promise.reject();
   });
 }
+
 module.exports = {
   findTeam,
-  findAll
-}
+  findAllTeams
+};
