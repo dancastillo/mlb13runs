@@ -7,20 +7,27 @@
   <title>13 Runs</title>
 </head>
 <body>
-  <h3>First to 13 runs wins!</h3>
-  {{!-- {{teams}} --}}
-  <table>
-    <tr>
-      <th>Team</th>
-      <th>Runs</th>
-    </tr>
-    {{#each teams}}
-    <tr>
-      <td>{{this.market}} {{this.name}}</td>
-      <td>{{this.runs}}</td>
-    </tr>
-    {{/each}}
-  </table>
-  
+  <div class="container">
+    <h3>First to 13 runs wins!</h3>
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Runs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each teams}}
+          <tr>
+            <td>{{this.market}} {{this.name}}</td>
+            <td>{{this.runs}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </body>
 </html>
