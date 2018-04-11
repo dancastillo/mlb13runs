@@ -59,17 +59,17 @@ const saveTeamRunsData = (games, date) => {
     }
   };
 
-    find.findScore(team, scores).then((savedRuns) => {
-      // console.log(savedRuns);
-    }).catch((err) => {
-      console.log(`updateScores: ${err}`);
-    });
+    find.findScore(team, scores)
+      .then((savedRuns) => {})
+      .catch((err) => {
+        console.log(`Err in Sportrader.js findScores: ${err}`);
+      });
 
-    find.findScore(awayTeam, awayScores).then((savedRuns) => {
-      // console.log(savedRuns);
-    }).catch((err) => {
-      console.log(`updateScores: ${err}`);
-    });
+    find.findScore(awayTeam, awayScores)
+      .then((savedRuns) => {})
+      .catch((err) => {
+        console.log(`Err in Sportrader.js findScores: ${err}`);
+      });
 };
 
 /**
@@ -104,20 +104,19 @@ const makeApiRequest = () => {
 const getDataFromAPI = () => {
   const yesterdayDate = helpers.getDateFormat()
 
-  find.isDataUsed(yesterdayDate).then((isDataUsed) => {
-
-    if (!isDataUsed) {
+  find.isTodaysRunsSaved(yesterdayDate).then((isTodaysRunsSaved) => {
+    if (isTodaysRunsSaved) {
       makeApiRequest();
 
-      update.updateDateRetrieved(yesterdayDate).then((date) => {
-        console.log('updateDateRetrieved: ', date);
-      }).catch((err) => {
-        console.log(`yesterdayDate: ${err}`);
-      });
+      update.updateDateRetrieved(yesterdayDate)
+        .then((date) => {})
+        .catch((err) => {
+          return Promise.reject(err);
+        });
     }
 
   }).catch((err) => {
-    console.log(err);
+    console.log(`Error in getData from API`);
   });
 };
 
