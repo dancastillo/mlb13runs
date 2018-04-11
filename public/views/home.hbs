@@ -15,13 +15,16 @@
           <tr>
             <th>Team</th>
             <th>Runs</th>
+            <th>Runs Left</th>
           </tr>
         </thead>
         <tbody>
+          <p style="display: none;">{{sortTeamsByRunsLeft teams}}</p>
           {{#each teams}}
           <tr>
             <td>{{this.market}} {{this.name}}</td>
-            <td>{{this.runs}}</td>
+            <td>{{sortArray this.runs}}</td>
+            <td>{{scoresLeft this.runs.length}}</td>
           </tr>
           {{/each}}
         </tbody>
