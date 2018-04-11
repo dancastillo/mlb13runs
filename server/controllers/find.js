@@ -1,4 +1,3 @@
-const mongoose = require('./../db/mongoose');
 const {Team} = require('./../models/team');
 const {DateScore} = require('./../models/dateScore');
 const save = require('./save');
