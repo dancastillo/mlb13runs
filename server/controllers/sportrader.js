@@ -2,7 +2,6 @@ const request = require('request');
 
 const mongoose = require('./../db/mongoose');
 const helpers = require('./../helpers/index');
-const {Team} = require('./../models/team');
 const find = require('./find');
 const update = require('./update');
 
@@ -26,6 +25,18 @@ const saveTeamRunsData = (games, date) => {
   // away team runs
   const awayRuns = games.game.away.runs;
 
+  const team = {
+    name,
+    market,
+    runs
+  };
+
+  const awayTeam = {
+    name: awayName,
+    market: awayMarket,
+    runs: awayRuns
+  };
+
   const scores = {
     score: runs,
     date: date,
@@ -48,25 +59,18 @@ const saveTeamRunsData = (games, date) => {
     }
   };
 
-    update.updateScores(team, scores).then((savedRuns) => {
-      console.log(savedRuns);
+    find.findScore(team, scores).then((savedRuns) => {
+      // console.log(savedRuns);
     }).catch((err) => {
-      console.log(err);
-    });
-    update.updateScores(team, awayScores).then((savedRuns) => {
-      console.log(savedRuns);
-    }).catch((err) => {
-      console.log(err);
+      console.log(`updateScores: ${err}`);
     });
 
-    const yesterdayDate = helpers.getDateFormat();
-    update.updateDateRetrieved(yesterdayDate).then((date) => {
-      console.log(date);
+    find.findScore(awayTeam, awayScores).then((savedRuns) => {
+      // console.log(savedRuns);
     }).catch((err) => {
-      console.log(err);
+      console.log(`updateScores: ${err}`);
     });
-
-}
+};
 
 /**
  * @description makes call to API to get and save data
@@ -87,12 +91,12 @@ const makeApiRequest = () => {
         saveTeamRunsData(games, date);
         num ++;
       });
-  
+
     } catch (err) {
       console.log(`api error in sportrader: ${err}`);
     }  
   // });
-}
+};
 
 /**
  * @description Checks if api was already checked for yesterdays date
@@ -101,11 +105,20 @@ const getDataFromAPI = () => {
   const yesterdayDate = helpers.getDateFormat()
 
   find.isDataUsed(yesterdayDate).then((isDataUsed) => {
-    makeApiRequest();
+
+    if (!isDataUsed) {
+      makeApiRequest();
+
+      update.updateDateRetrieved(yesterdayDate).then((date) => {
+        console.log('updateDateRetrieved: ', date);
+      }).catch((err) => {
+        console.log(`yesterdayDate: ${err}`);
+      });
+    }
+
   }).catch((err) => {
     console.log(err);
   });
+};
 
-}
-
-getDataFromAPI();
+module.exports = {getDataFromAPI};
