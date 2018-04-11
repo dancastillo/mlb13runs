@@ -6,6 +6,11 @@ const {Team} = require('./../models/team');
 const find = require('./find');
 const update = require('./update');
 
+/**
+ * @description update runs for data in collection
+ * @param {object} games 
+ * @param {string} date 
+ */
 const saveTeamRunsData = (games, date) => {
   // home team name
   const name = games.game.home.name;
@@ -43,10 +48,21 @@ const saveTeamRunsData = (games, date) => {
     }
   };
 
-    update.updateScores(team, scores);
-    update.updateScores(team, awayScores);
+    update.updateScores(team, scores).then((savedRuns) => {
+      console.log(savedRuns);
+    }).catch((err) => {
+      console.log(err);
+    });
+    update.updateScores(team, awayScores).then((savedRuns) => {
+      console.log(savedRuns);
+    }).catch((err) => {
+      console.log(err);
+    });
 }
 
+/**
+ * @description makes call to API to get and save data
+ */
 const makeApiRequest = () => {
   // request(helpers.apiUrl, function (error, response, body) {
     try {
