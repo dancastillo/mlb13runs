@@ -4,6 +4,11 @@ const {DateScore} = require('./../models/dateScore');
 const save = require('./save');
 const update = require('./update');
 
+/**
+ * @description find team based on name and market
+ * @param {string} name 
+ * @param {string} market 
+ */
 const findTeam = (name, market) => {
   return Team.findOne({
     name,
@@ -60,6 +65,11 @@ const isDataUsed = (date) => {
   });
 };
 
+/**
+ * @description Find the score if it was updated 
+ * @param {object} team 
+ * @param {object} score 
+ */
 const findScore = (team, score) => {
   const teamRuns = team.runs;
   return Team.findOne({
