@@ -17,8 +17,9 @@ const getDateFormat = () => {
   const yesterday = formatDate(dayBefore);
 
   const yy = yesterday[0].toString().substr(-2);
-  const mm = yesterday[1]+1;
-  const dd = (yesterday[2] < 10) ? `0${yesterday[2]}` : yesterday[2];
+  const mmmm = Number(yesterday[1])+1;
+  const mm = (Number(mmmm) < 10) ? `0${mmmm}` : mmmm;
+  const dd = (Number(yesterday[2]) < 10) ? `0${yesterday[2]}` : yesterday[2];
   
   return `${yy}/${mm}/${dd}`;
 };
