@@ -58,6 +58,14 @@ const saveTeamRunsData = (games, date) => {
     }).catch((err) => {
       console.log(err);
     });
+
+    const yesterdayDate = helpers.getDateFormat();
+    update.updateDateRetrieved(yesterdayDate).then((date) => {
+      console.log(date);
+    }).catch((err) => {
+      console.log(err);
+    });
+
 }
 
 /**
