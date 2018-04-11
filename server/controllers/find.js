@@ -42,7 +42,7 @@ const findAllTeams = () => {
  *          true - then NEED TO update collection
  *          falses - data has ALREADY been updated
  */
-const isDataUsed = (date) => {
+const isTodaysRunsSaved = (date) => {
   return DateScore.findOne({
     date
   }).then((date) => {
@@ -100,6 +100,6 @@ const findScore = (team, score) => {
 module.exports = {
   findTeam,
   findAllTeams,
-  isDataUsed,
+  isTodaysRunsSaved,
   findScore
 };
