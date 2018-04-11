@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TeamSchema = new Schema({
+const DaySchema = new Schema({
   date: {
     type: String,
     required: true,
@@ -14,6 +14,6 @@ const TeamSchema = new Schema({
   }
 });
 
-const Team = mongoose.model('Team', TeamSchema);
+const Day = mongoose.model('Day', DaySchema);
 
-module.exports = {Team}
+module.exports = {Day};
