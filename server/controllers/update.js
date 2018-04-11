@@ -1,6 +1,5 @@
-const mongoose = require('./../db/mongoose');
 const {Team} = require('./../models/team');
-const {Day} = require('./../models/day');
+const {DateScore} = require('./../models/dateScore');
 
 /**
  * @description Updates scores based on team
@@ -10,8 +9,7 @@ const {Day} = require('./../models/day');
 const updateScores = (team, scores) => {
   return Team.findOneAndUpdate({
     name: team.name,
-    market: team.market,
-    abbr: team.abbr
+    market: team.market
   }, {
     $push: {
       scores: scores
@@ -22,7 +20,7 @@ const updateScores = (team, scores) => {
   }).then((doc) => {
     return doc;
   }).catch((err) => {
-    return Promise.reject();
+    return Promise.reject(err);
   });
 };
 
@@ -32,7 +30,7 @@ const updateScores = (team, scores) => {
  * @return Returns data object
  */
 const updateDateRetrieved = (date) => {
-  return Day.findOneAndUpdate({
+  return DateScore.findOneAndUpdate({
     date
   }, {
     $set: {
@@ -48,4 +46,7 @@ const updateDateRetrieved = (date) => {
   });
 };
 
-module.exports = {updateScores};
+module.exports = {
+  updateScores,
+  updateDateRetrieved
+};
