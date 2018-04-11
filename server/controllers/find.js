@@ -1,7 +1,8 @@
 const mongoose = require('./../db/mongoose');
 const {Team} = require('./../models/team');
-const {Day} = require('./../models/Day');
+const {DateScore} = require('./../models/dateScore');
 const save = require('./save');
+const update = require('./update');
 
 const findTeam = (name, market) => {
   return Team.findOne({
@@ -22,9 +23,6 @@ const findTeam = (name, market) => {
   });
 };
 
-/**
- * 
- */
 const findAllTeams = () => {
   return Team.find().then((teams) => {
     return teams;
@@ -41,29 +39,58 @@ const findAllTeams = () => {
  *          falses - data has ALREADY been updated
  */
 const isDataUsed = (date) => {
-  return Day.findOne({
+  return DateScore.findOne({
     date
   }).then((date) => {
     // if date doesnt exist
     // false means runs for date havent been updated
     if (!date) {
-      return true;
+      return false;
     }
 
     // if date.retrieved is false
     // false means runs for date havent been updated
     if (!date.retrieved) {
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }).catch((err) => {
     return Promise.reject();
   });
 };
 
+const findScore = (team, score) => {
+  const teamRuns = team.runs;
+  return Team.findOne({
+    name: team.name,
+    market: team.market,
+  }).then((team) => {
+    if (!team) {
+      return Promise.reject(team);
+    }
+
+    if (team.runs !== undefined && team.runs.includes(teamRuns)) {
+      // run has already been accounted for
+      return team;
+    } else {
+      // run hasnt been accounted for 
+      // update document with run information
+      return update.updateScores(team, score).then((team) => {
+        // console.log(team);
+        return team;
+      }).catch((err) => {
+        return Promise.reject(err);
+      })
+    }
+  }).catch((err) => {
+    return Promise.reject(err);
+  });
+}
+
 module.exports = {
   findTeam,
   findAllTeams,
-  isDataUsed
+  isDataUsed,
+  findScore
 };
