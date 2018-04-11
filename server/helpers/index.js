@@ -1,3 +1,6 @@
+/**
+ * @description Returns API url
+ */
 const apiUrl = () => {
   return `http://api.sportradar.us/mlb-t6/games/${getDateFormat()}/boxscore.json?api_key=${process.env.API_KEY}`;
 };
@@ -10,8 +13,7 @@ const getDateFormat = () => {
   const date = new Date();
   const today = formatDate(date);
   
-  const dayBefore = new Date(today[0], today[1], today[2]-x);
-  console.log(dayBefore)
+  const dayBefore = new Date(today[0], today[1], today[2]-1);
   const yesterday = formatDate(dayBefore);
 
   const yy = yesterday[0].toString().substr(-2);
