@@ -59,17 +59,22 @@ const saveTeamRunsData = (games, date) => {
     }
   };
 
+  if(team.runs < 14) {
     find.findScore(team, scores)
       .then((savedRuns) => {})
       .catch((err) => {
         console.log(`Err in Sportrader.js findScores: ${err}`);
       });
-
+  }
+    
+  if (awayTeam.runs < 14) {
     find.findScore(awayTeam, awayScores)
       .then((savedRuns) => {})
       .catch((err) => {
         console.log(`Err in Sportrader.js findScores: ${err}`);
       });
+  }
+    
 };
 
 /**
@@ -78,19 +83,22 @@ const saveTeamRunsData = (games, date) => {
 const makeApiRequest = () => {
   // request(helpers.apiUrl, function (error, response, body) {
     try {
+      
       const {data} = require('./../db/data.js');
       // console.log(data)
-      const body = JSON.stringify(data);
-      var jsonBody = JSON.parse(body);
-  
-      let games = jsonBody['league']['games'];
-      const date = jsonBody.league.date;
-  
-      let num = 1;
-      games.forEach((games) => {
-        saveTeamRunsData(games, date);
-        num ++;
-      });
+      data.forEach((dataObj) => {
+        const body = JSON.stringify(dataObj);
+        var jsonBody = JSON.parse(body);
+    
+        let games = jsonBody['league']['games'];
+        const date = jsonBody.league.date;
+    
+        let num = 1;
+        games.forEach((games) => {
+          saveTeamRunsData(games, date);
+          num ++;
+        });
+      })
 
     } catch (err) {
       console.log(`api error in sportrader: ${err}`);
@@ -102,10 +110,12 @@ const makeApiRequest = () => {
  * @description Checks if api was already checked for yesterdays date
  */
 const getDataFromAPI = () => {
-  const yesterdayDate = helpers.getDateFormat()
 
+  const yesterdayDate = helpers.getDateFormat()
+  // console.log(yesterdayDate);
   find.isTodaysRunsSaved(yesterdayDate).then((isTodaysRunsSaved) => {
-    if (isTodaysRunsSaved) {
+
+    if (!isTodaysRunsSaved) {
       makeApiRequest();
 
       update.updateDateRetrieved(yesterdayDate)
