@@ -85,12 +85,13 @@ const makeApiRequest = () => {
     try {
       
       const {data} = require('./../db/data.js');
-      // console.log(data)
+
       data.forEach((dataObj) => {
         const body = JSON.stringify(dataObj);
         var jsonBody = JSON.parse(body);
     
         let games = jsonBody['league']['games'];
+
         const date = jsonBody.league.date;
     
         let num = 1;
@@ -112,7 +113,7 @@ const makeApiRequest = () => {
 const getDataFromAPI = () => {
 
   const yesterdayDate = helpers.getDateFormat()
-  // console.log(yesterdayDate);
+
   find.isTodaysRunsSaved(yesterdayDate).then((isTodaysRunsSaved) => {
 
     if (!isTodaysRunsSaved) {
