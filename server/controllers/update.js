@@ -38,6 +38,7 @@ const updateDateRetrieved = (date) => {
     }
   }).then((date) => {
     if (!date.retrieved) {
+      const err = `Date.retrieved: ${date.retrieved}`;
       return Promise.reject(err);
     }
     return date;
