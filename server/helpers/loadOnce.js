@@ -1,6 +1,17 @@
+const env = require('dotenv').config();
 const saveDates = require('./saveDates');
 const saveTeams = require('./saveTeams');
+const sportrader = require('./../controllers/sportrader');
 
-saveDates.loadAllDates();
-saveTeams.loadAllTeams();
+/** 
+ * RUN FIRST
+ */
+// saveTeams.loadAllTeams();
+// saveDates.loadAllDates();
+
+/**
+ * RUN AFTER
+ */
+// sportrader.getDataFromAPI();
+
 
