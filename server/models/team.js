@@ -23,7 +23,8 @@ const opponentObj = {
 const TeamSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   market: {
     type: String,
@@ -31,7 +32,8 @@ const TeamSchema = new Schema({
   },
   abbr: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   // array of runs obtained
   runs: {
