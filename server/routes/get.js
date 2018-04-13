@@ -1,5 +1,6 @@
 const find = require('./../controllers/find');
 const sportrader = require('./../controllers/sportrader')
+const helpers = require('./../helpers/hbsHelpers');
 /**
  * Route users to home page with data from collection about teams
  * @param {object} req 
@@ -11,8 +12,9 @@ const getHome = (req, res) => {
 
   // get all teams and data
   find.findAllTeams().then((teams) => {
+    teams = helpers.sortTeamsByRunsLeft(teams);
     res.render('home.hbs', {
-      teams: teams
+      teams
     });
   }).catch((err) => {
     res.status(400).send(err);
