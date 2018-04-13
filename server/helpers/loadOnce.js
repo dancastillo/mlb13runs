@@ -12,6 +12,15 @@ const sportrader = require('./../controllers/sportrader');
 /**
  * RUN AFTER
  */
-// sportrader.getDataFromAPI();
+sportrader.getDataFromAPI();
 
+ const {data} = require('./../db/data.js');
 
+data.forEach((dataObj) => {
+  const games = dataObj.league.games;
+  const date = dataObj.league.date;
+
+  games.forEach((games) => {
+    sportrader.saveTeamRunsData(games, date);
+  });
+});
