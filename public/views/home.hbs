@@ -6,6 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>13 Runs</title>
 </head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117498114-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117498114-1');
+  </script>
 <body>
   <div class="container">
     <h3>First to 13 runs wins!</h3>
@@ -19,7 +28,6 @@
           </tr>
         </thead>
         <tbody>
-          <p style="display: none;">{{sortTeamsByRunsLeft teams}}</p>
           {{#each teams}}
           <tr>
             <td>{{this.market}} {{this.name}}</td>
