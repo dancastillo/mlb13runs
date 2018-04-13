@@ -1,6 +1,7 @@
 const env = require('dotenv').config();
 
 const express = require('express');
+const mongoose = require('./db/mongoose');
 
 const schedule = require('./helpers/schedule');
 const {routes} = require('./routes/index');
