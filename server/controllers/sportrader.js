@@ -123,4 +123,7 @@ const getDataFromAPI = () => {
   });
 };
 
-module.exports = {getDataFromAPI};
+module.exports = {
+  getDataFromAPI,
+  saveTeamRunsData
+};
