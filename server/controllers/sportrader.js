@@ -83,19 +83,19 @@ const saveTeamRunsData = (games, date) => {
 const makeApiRequest = () => {
   request(helpers.apiUrl(), function (error, response, body) {
     try {
-        var jsonBody = JSON.parse(body);
+      const data = JSON.parse(body);
     
-        let games = body['league']['games'];
+      const games = data.league.games;
+        
+      const date = data.league.date;
 
-        const date = body.league.date;
-
-        games.forEach((games) => {
-          saveTeamRunsData(games, date);
-        });
+      games.forEach((games) => {
+        saveTeamRunsData(games, date);
+      });
 
     } catch (err) {
       console.log(`api error in sportrader: ${err}`);
-    }  
+    }
   });
 };
 
@@ -107,7 +107,6 @@ const getDataFromAPI = () => {
   const yesterdayDate = helpers.getDateFormat()
   
   find.isTodaysRunsSaved(yesterdayDate).then((isTodaysRunsSaved) => {
-    
     if (!isTodaysRunsSaved) {
       makeApiRequest();
 

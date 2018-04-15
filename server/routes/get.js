@@ -8,7 +8,7 @@ const helpers = require('./../helpers/hbsHelpers');
  */
 const getHome = (req, res) => {
   // make sure data has been updated
-  sportrader.getDataFromAPI;
+  sportrader.getDataFromAPI();
 
   // get all teams and data
   find.findAllTeams().then((teams) => {

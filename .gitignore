@@ -85,3 +85,7 @@ typings/
 
 # previous data from mlb
 server/db/data.js
+
+#testing data
+*test*
+test.js

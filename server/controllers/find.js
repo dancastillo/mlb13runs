@@ -46,6 +46,7 @@ const isTodaysRunsSaved = (date) => {
   return DateScore.findOne({
     date
   }).then((date) => {
+    
     // if date doesnt exist
     // false means runs for date havent been updated
     if (!date) {
@@ -60,7 +61,7 @@ const isTodaysRunsSaved = (date) => {
 
     return true;
   }).catch((err) => {
-    return Promise.reject();
+    return Promise.reject(err);
   });
 };
 
